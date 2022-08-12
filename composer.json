@@ -13,6 +13,7 @@
         }
     ],
     "require": {
-        "ext-mongodb": "*"
+        "ext-mongodb": "*",
+        "php": ">=7.0"
     }
 }

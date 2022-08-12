@@ -223,4 +223,20 @@ class KMongo {
 		$ret = current($cursor->toArray());
 		return (is_object($ret) && $ret->ok == 1) ? $ret->n : 0;
 	}
+
+	/**
+	 * 删除文档
+	 * @param bool $onlyFirst
+	 * @return \MongoDB\Driver\WriteResult
+	 * @throws \Kanin\MyTools\Exception\KMongoException
+	 */
+	public function delete(bool $onlyFirst = false) {
+		if (!$this->explodeColl($this->collection)) {
+			throw new KMongoException('collection format error');
+		}
+		$bulk = new BulkWrite;
+		$bulk->delete($this->filter, ['limit' => (int)$onlyFirst]);   // limit 为 1 时，删除第一条匹配数据，为 0 时删除所有匹配的数据
+		$writeConcern = new WriteConcern(WriteConcern::MAJORITY, 1000);
+		return $this->manager->executeBulkWrite($this->collection, $bulk, $writeConcern);
+	}
 }

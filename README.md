@@ -66,6 +66,37 @@ $data = $manager->collection('blog.users')->limit(1, 1)->filter($filter)->getAll
 //原始查询 (数据没转换) 上面的两个查询都是基于这个
 $data = $manager->collection('blog.users')->limit(1, 1)->filter($filter)->get();
 
+/**
+ * where 仿orm操作  类似于mysql的查询组合  _id>2 and (_id=3 or _id=4)
+ * 目前支持的操作符
+ * =    等于
+ * <    小于
+ * <=   小于等于
+ * >    大于
+ * >=   大于等于
+ * in   in查询
+ * nin  not in 查询
+ * 
+ * 展示指定字段
+ * field(['email'=>1, 'name'=>1,'_id'=>0])
+ * 1是展示 0是排除 
+ * 要注意一下，用email=1, name=0是不行的，mongo官方会提示逻辑错误，除了_id可以自由设置0或1，其他字段要么全是1，要么全是0
+ * 
+ * 排序
+ * sort($field, $desc)
+ * $desc 1是升序，-1是降序  只能填1或者-1
+*/
+
+$find = $manager->collection($collection)
+	->where('_id', '>', 2)
+	->whereOr('_id', '=', 3)
+	->whereOr('_id', '=', 4)
+	->field(['name'=>1, 'email'=>1, '_id'=>0])
+	->sort('_id', -1)
+	->getAll();
+
+
+
 ```
 
 ### 删除

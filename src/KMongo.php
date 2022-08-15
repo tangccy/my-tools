@@ -121,7 +121,7 @@ class KMongo {
 
 	/**
 	 * 更新
-	 * @param array $set update的更新对象和一些更新的操作符（如$，$inc…）等，也可以理解为sql update查询set子句后面的更新内容
+	 * @param array $data update的更新对象和一些更新的操作符（如$，$inc…）等，也可以理解为sql update查询set子句后面的更新内容
 	 * @param array $updateOptions ['multi' => false, 'upsert' => false, ...] 额外的一些选项
 	 * |++++ multi 可选，MongoDB默认是false，只更新找到的第一条记录，如果这个参数为true，就把按条件查出来的多条记录全部更新
 	 * |++++ upsert 可选。如果不存在update的记录，是否插入objNew：true为插入，默认是false，不插入
@@ -129,7 +129,7 @@ class KMongo {
 	 * @return false|\MongoDB\Driver\WriteResult
 	 * @throws \Kanin\MyTools\Exception\KMongoException
 	 */
-	public function update($set, $updateOptions = []) {
+	public function update($data, $updateOptions = []) {
 		if (!$this->explodeColl($this->collection)) {
 			throw new KMongoException('collection format error');
 		}
@@ -137,7 +137,7 @@ class KMongo {
 			return false;
 		}
 		$bulk = new BulkWrite;
-		$bulk->update($this->filter, ['$set' => $set], $updateOptions);
+		$bulk->update($this->filter, $data, $updateOptions);
 		$writeConcern = new WriteConcern(WriteConcern::MAJORITY, 1000);
 		return $this->manager->executeBulkWrite($this->collection, $bulk, $writeConcern);
 	}

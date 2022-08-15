@@ -86,7 +86,7 @@ $data = $manager->collection('blog.users')->limit(1, 1)->filter($filter)->get();
  * sort($field, $desc)
  * $desc 1是升序，-1是降序  只能填1或者-1
 */
-
+$collection = 'blog.users';
 $find = $manager->collection($collection)
 	->where('_id', '>', 2)
 	->whereOr('_id', '=', 3)

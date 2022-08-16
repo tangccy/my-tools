@@ -104,5 +104,5 @@ $find = $manager->collection($collection)
 ```php  
 //过滤条件
 $filter = ['_id' => ['$gt' => 1]];
-$manager->collection('blog.users')->delete();
+$manager->collection('blog.users')->filter($filter)->delete();
 ```

@@ -69,11 +69,12 @@ $data = $manager->collection('blog.users')->limit(1, 1)->filter($filter)->get();
 /**
  * where 仿orm操作  类似于mysql的查询组合  _id>2 and (_id=3 or _id=4)
  * 目前支持的操作符
- * =    等于
- * <    小于
- * <=   小于等于
- * >    大于
- * >=   大于等于
+ * =        等于
+ * <        小于
+ * <=       小于等于
+ * >        大于
+ * >=       大于等于
+ * <>或!=   不等于 
  * in   in查询
  * nin  not in 查询
  * 

@@ -16,5 +16,5 @@
         "ext-mongodb": "*",
         "php": ">=7.0"
     },
-    "license": "MTT"
+    "license": "MIT"
 }

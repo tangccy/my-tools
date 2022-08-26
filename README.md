@@ -43,7 +43,7 @@ $res = $manager->collection('blog.users')->insertAll($document);
 ```php
 $set = ['name'=>'xiaomin'];
 $filter = ['_id'=>1];
-$res = $manager->collection('blog.users')->filter($filter)->update($filter, $set);
+$res = $manager->collection('blog.users')->filter($filter)->update(['$set'=>$set], ['upsert' => false]);
 
 ```
 

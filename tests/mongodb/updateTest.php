@@ -9,5 +9,5 @@ $manager = new \Kanin\MyTools\KMongo($ip, $port, $username, $password);
 
 $set = ['name'=>'xiaomin'];
 $filter = ['_id'=>1];
-$res = $manager->collection('blog.users')->filter($filter)->update($filter, $set);
+$res = $manager->collection('blog.users')->filter($filter)->update(['$set'=>$set], ['upsert' => false]);
 var_dump($res);

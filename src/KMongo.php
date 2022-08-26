@@ -217,7 +217,8 @@ class KMongo {
 	 */
 	public function getAll(array $options = []): array {
 		$data = $this->get($options);
-		return $data ? $data->toArray() : [];
+		$data = $data->toArray();
+		return $data ? $data[0] : [];
 	}
 
 	/**

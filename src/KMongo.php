@@ -206,7 +206,7 @@ class KMongo {
 	 */
 	public function getOne(array $options = []) {
 		$data = $this->get($options);
-		return $data ? $data->toArray()[0] : [];
+		return $data->toArray() ? $data->toArray()[0] : [];
 	}
 
 	/**
